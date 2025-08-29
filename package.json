@@ -1,0 +1,18 @@
+{
+  "name": "yashraj-portfolio",
+  "version": "1.0.0",
+  "description": "AI Engineer Portfolio with Contact Form",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["portfolio", "ai", "machine-learning", "contact-form"],
+  "author": "Yashraj Dudhe",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.56.0",
+    "dotenv": "^16.0.0"
+  }
+}
