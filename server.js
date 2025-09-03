@@ -70,9 +70,9 @@ const server = http.createServer((req, res) => {
     });
 });
 
-server.listen(port, () => {
-    console.log(`🚀 Portfolio server running at http://localhost:${port}/`);
-    console.log(`📡 Supabase config endpoint: http://localhost:${port}/api/config`);
+server.listen(port, '0.0.0.0', () => {
+    console.log(`🚀 Portfolio server running at http://0.0.0.0:${port}/`);
+    console.log(`📡 Supabase config endpoint: http://0.0.0.0:${port}/api/config`);
     
     // Validate environment variables
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
