@@ -3,8 +3,8 @@
 
 // Configuration object that will be populated with environment variables
 window.SUPABASE_CONFIG = {
-    url: null,
-    key: null
+    url: https://iormtqbhllolkkcqjpcm.supabase.co,
+    key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlvcm10cWJobGxvbGtrY3FqcGNtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjQ3MTQ5NSwiZXhwIjoyMDcyMDQ3NDk1fQ.Wg7mv-3s_H0pGcf_9vY4NYyRQ0aQJj6FdqyrbhbGe7w
 };
 
 // Function to load environment configuration

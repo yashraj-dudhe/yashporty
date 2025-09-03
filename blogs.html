@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashraj Dudhe - Tech Blog Management</title>
+    <meta name="description" content="Content management system for technical blog posts, tutorials, and insights on software development and technology.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blogs.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="blog-auth.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="blog-nav-left">
+                <a href="index.html" class="back-to-portfolio">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Portfolio</span>
+                </a>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <h1>Tech Blog Management</h1>
+            <p>Create and manage your technical blog posts and insights</p>
+            <div class="blog-actions">
+                <button id="new-blog-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    New Blog Post
+                </button>
+                <button id="manage-blogs-btn" class="btn btn-outline">
+                    <i class="fas fa-cog"></i>
+                    Manage Posts
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <!-- Blog Editor (Hidden by default) -->
+            <div id="blog-editor" class="blog-editor" style="display: none;">
+                <div class="editor-header">
+                    <h2>Create New Blog Post</h2>
+                    <button id="close-editor" class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="blog-form">
+                    <div class="form-group">
+                        <label for="blog-title">Title</label>
+                        <input type="text" id="blog-title" name="title" placeholder="Enter blog title..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-excerpt">Excerpt</label>
+                        <textarea id="blog-excerpt" name="excerpt" placeholder="Brief description of your blog post..." rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-tags">Tags</label>
+                        <input type="text" id="blog-tags" name="tags" placeholder="AI, Machine Learning, Automation (comma separated)">
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-content">Content</label>
+                        <textarea id="blog-content" name="content" placeholder="Write your blog content here... (Markdown supported)" rows="15" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="save-draft" class="btn btn-outline">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary">Publish Blog</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Blog List -->
+            <div id="blog-list" class="blog-list">
+                <div class="blog-filters">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All Posts</button>
+                        <button class="filter-tab" data-filter="published">Published</button>
+                        <button class="filter-tab" data-filter="draft">Drafts</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="blog-search" placeholder="Search blogs...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <!-- Blog Posts Grid -->
+                <div id="blogs-container" class="blogs-grid">
+                    <!-- Sample Blog Post -->
+                    <article class="blog-card">
+                        <div class="blog-meta">
+                            <span class="blog-date">January 15, 2025</span>
+                            <span class="blog-status published">Published</span>
+                        </div>
+                        <h3 class="blog-title">Building Intelligent Agents with MCP</h3>
+                        <p class="blog-excerpt">
+                            Exploring the Model Context Protocol (MCP) and how it's revolutionizing the way we build 
+                            AI agents that can understand and interact with complex systems.
+                        </p>
+                        <div class="blog-tags">
+                            <span class="tag">MCP</span>
+                            <span class="tag">AI Agents</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="blog-action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button class="blog-action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                            <button class="blog-action-btn share-btn">
+                                <i class="fas fa-share"></i>
+                                Share
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Add more sample posts for demonstration -->
+                    <article class="blog-card">
+                        <div class="blog-meta">
+                            <span class="blog-date">January 10, 2025</span>
+                            <span class="blog-status draft">Draft</span>
+                        </div>
+                        <h3 class="blog-title">The Future of LangChain in Enterprise AI</h3>
+                        <p class="blog-excerpt">
+                            Diving deep into LangChain's enterprise applications and how it's shaping the future 
+                            of business automation and intelligent workflows.
+                        </p>
+                        <div class="blog-tags">
+                            <span class="tag">LangChain</span>
+                            <span class="tag">Enterprise AI</span>
+                            <span class="tag">Workflows</span>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="blog-action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button class="blog-action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </button>
+                            <button class="blog-action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <i class="fas fa-blog"></i>
+                    <h3>No blogs yet</h3>
+                    <p>Start sharing your AI engineering insights with the world!</p>
+                    <button class="btn btn-primary">Create Your First Blog</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Yashraj Dudhe. Sharing technical knowledge with the world.</p>
+        </div>
+    </footer>
+
+    <script src="supabase-config.js"></script>
+    <script src="blogs.js"></script>
+</body>
+</html>
