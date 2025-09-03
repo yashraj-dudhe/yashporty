@@ -3,6 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
+    initMobileNav();
     initScrollAnimations();
     initContactForm();
     initTypingAnimation();
@@ -95,6 +96,54 @@ function updateNavOnScroll() {
         if (currentActive !== targetLink) {
             updateActiveNav(activeSection);
         }
+    }
+}
+
+// Mobile navigation functionality
+function initMobileNav() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (navToggle && navMenu) {
+        // Toggle mobile menu
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Update icon
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    navToggle.querySelector('i').className = 'fas fa-bars';
+                }
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
     }
 }
 
