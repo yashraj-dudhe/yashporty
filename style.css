@@ -991,7 +991,7 @@ a:hover {
     }
     
     .timeline-content {
-        padding: var(--spacing-md);
+        padding: 0;
         background: var(--bg-primary);
         border: 2px solid var(--border-light);
         margin: 0;
@@ -1021,6 +1021,36 @@ a:hover {
     
     .timeline-content li::before {
         font-size: 0.8rem;
+    }
+    
+    /* Mobile expandable cards */
+    .experience-header {
+        padding: 1rem;
+    }
+    
+    .experience-summary {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+    
+    .expand-icon {
+        font-size: 0.8rem;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .experience-details {
+        padding: 0 1rem;
+    }
+    
+    .expandable-card[data-expanded="true"] .experience-details {
+        padding: 0 1rem 1rem;
+        max-height: 800px;
+    }
+    
+    .experience-full-desc {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
     }
 }
 
@@ -1122,6 +1152,90 @@ a:hover {
     position: absolute;
     left: 0;
     font-weight: bold;
+}
+
+/* Expandable Experience Card Styles */
+.expandable-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.experience-header {
+    padding: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: background-color 0.2s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+.experience-header:hover {
+    background-color: var(--bg-secondary);
+}
+
+.experience-basic {
+    flex: 1;
+}
+
+.experience-summary {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: var(--spacing-xs) 0 0 0;
+    line-height: 1.4;
+    max-width: none;
+}
+
+.expand-icon {
+    margin-left: var(--spacing-sm);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.experience-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 var(--spacing-sm);
+}
+
+.experience-full-desc {
+    display: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+    max-width: none;
+}
+
+/* Expanded state */
+.expandable-card[data-expanded="true"] .timeline-content {
+    border-color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+.expandable-card[data-expanded="true"] .experience-details {
+    max-height: 600px;
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
+}
+
+.expandable-card[data-expanded="true"] .expand-icon {
+    transform: rotate(180deg);
+}
+
+.expandable-card[data-expanded="true"] .experience-summary {
+    display: none;
+}
+
+.expandable-card[data-expanded="true"] .experience-full-desc {
+    display: block;
 }
 
 /* Skills Section */

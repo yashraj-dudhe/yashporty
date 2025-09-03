@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initTypingAnimation();
     initThemeToggle();
+    initExpandableExperience();
     
     console.log('AI Portfolio initialized successfully');
 });
@@ -493,6 +494,56 @@ function updateThemeIcon(theme, iconElement) {
         iconElement.className = 'fas fa-sun';
     } else {
         iconElement.className = 'fas fa-moon';
+    }
+}
+
+// Expandable Experience Cards functionality
+function initExpandableExperience() {
+    const expandableCards = document.querySelectorAll('.expandable-card');
+    
+    expandableCards.forEach(card => {
+        const header = card.querySelector('.experience-header');
+        const expandIcon = card.querySelector('.expand-icon i');
+        
+        if (header) {
+            // Handle click events
+            header.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleCard(card, expandIcon);
+            });
+            
+            // Handle keyboard events for accessibility
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCard(card, expandIcon);
+                }
+            });
+        }
+    });
+}
+
+function toggleCard(card, expandIcon) {
+    const isExpanded = card.getAttribute('data-expanded') === 'true';
+    const header = card.querySelector('.experience-header');
+    
+    // Toggle the expanded state
+    card.setAttribute('data-expanded', !isExpanded);
+    header.setAttribute('aria-expanded', !isExpanded);
+    
+    // Add a small haptic feedback class for mobile
+    if (window.navigator && window.navigator.vibrate) {
+        window.navigator.vibrate(50);
+    }
+    
+    // Smooth scroll to card if expanding on mobile
+    if (!isExpanded && window.innerWidth <= 768) {
+        setTimeout(() => {
+            card.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }, 150);
     }
 }
 
