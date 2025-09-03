@@ -4,7 +4,9 @@
 class BlogAuth {
     constructor() {
         this.isAuthenticated = localStorage.getItem('blog_admin_auth') === 'true';
-        this.adminPassword = 'YashBlog2025!'; // TODO: Change this to your secure password
+        // Ensure clean password assignment
+        this.adminPassword = String('Bot_noob110').trim();
+        console.log('Admin password set to:', `"${this.adminPassword}"`);
         this.init();
     }
 
@@ -138,7 +140,25 @@ class BlogAuth {
     }
 
     validatePassword(password) {
-        return password === this.adminPassword;
+        // Add debugging to identify the issue
+        console.log('=== PASSWORD DEBUG ===');
+        console.log('Entered password:', `"${password}"`);
+        console.log('Entered length:', password.length);
+        console.log('Expected password:', `"${this.adminPassword}"`);
+        console.log('Expected length:', this.adminPassword.length);
+        console.log('Are they equal?:', password === this.adminPassword);
+        console.log('===================');
+        
+        // Clean both strings and compare
+        const entered = password.toString().trim();
+        const expected = this.adminPassword.toString().trim();
+        
+        console.log('After cleaning:');
+        console.log('Cleaned entered:', `"${entered}"`);
+        console.log('Cleaned expected:', `"${expected}"`);
+        console.log('Cleaned match:', entered === expected);
+        
+        return entered === expected;
     }
 
     login() {
